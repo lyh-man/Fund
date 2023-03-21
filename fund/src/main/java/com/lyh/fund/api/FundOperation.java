@@ -80,8 +80,9 @@ public class FundOperation {
             buyFund.setTodayDate(fund.getDate());
             buyFund.setTodayNetValue(fund.getNetValue());
 
-            buyFund.setRevenue(fund.getNetValue().subtract(buyFund.getNetValue()).multiply(buyFund.getMoney()));
-            buyFund.setRevenuePercent(fund.getNetValue().subtract(buyFund.getNetValue()).divide(buyFund.getNetValue(), 4, RoundingMode.CEILING).multiply(new BigDecimal(100)));
+            BigDecimal revenue = fund.getNetValue().subtract(buyFund.getNetValue()).divide(buyFund.getNetValue(), 4, RoundingMode.CEILING);
+            buyFund.setRevenue(revenue.multiply(buyFund.getMoney()));
+            buyFund.setRevenuePercent(revenue.multiply(new BigDecimal(100)));
         }
         System.out.println(buyFundList);
 
